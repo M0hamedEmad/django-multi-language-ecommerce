@@ -1,0 +1,190 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-04-15 21:53+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: api/views.py:71
+msgid ""
+"The required quantity is not available. The largest number of this product "
+"is { is_avilalbe[1]}"
+msgstr "الكمية المطلوبة غير متوفرة. أكبر عدد من هذا المنتجهو { is_avilalbe[1]}"
+
+#: api/views.py:79
+msgid "something error happened may be cart is not found"
+msgstr "حدث خطأ ما، ربما لم يتم العثور على السلة"
+
+#: models.py:10 models.py:41
+msgid "website_title"
+msgstr "عنوان الموقع"
+
+#: models.py:11 models.py:42
+msgid "description"
+msgstr "الوصف"
+
+#: models.py:12
+msgid "website icon"
+msgstr "ايقونة الموقع"
+
+#: models.py:13 models.py:54 models.py:72
+msgid "created at"
+msgstr "تم الإنشاء في"
+
+#: models.py:14
+#, fuzzy
+#| msgid "created at"
+msgid "updated at"
+msgstr "تم الإنشاء في"
+
+#: models.py:43
+msgid "language"
+msgstr "اللغة"
+
+#: models.py:55
+msgid "quantity"
+msgstr "الكمية"
+
+#: models.py:70
+msgid "name"
+msgstr "الاسم"
+
+#: models.py:71
+msgid "phone"
+msgstr "الهاتف"
+
+#: templates/store/carts.html:4
+msgid "Carts"
+msgstr ""
+
+#: templates/store/carts.html:10
+msgid "Shopping Cart"
+msgstr "عربة التسوق"
+
+#: templates/store/carts.html:18
+msgid "Product"
+msgstr "المنتج"
+
+#: templates/store/carts.html:19
+msgid "Price"
+msgstr "السعر"
+
+#: templates/store/carts.html:20
+msgid "Quantity"
+msgstr "الكمية"
+
+#: templates/store/carts.html:21 templates/store/carts.html:86
+msgid "Total"
+msgstr "المجموع"
+
+#: templates/store/carts.html:33 templates/store/home.html:42
+msgid "Sold Out"
+msgstr "نفذت الكمية"
+
+#: templates/store/carts.html:75
+msgid "Summary"
+msgstr "الملخص"
+
+#: templates/store/carts.html:77
+msgid "Subtotal"
+msgstr "المجموع الفرعي"
+
+#: templates/store/carts.html:81
+msgid "Shipping"
+msgstr "الشحن"
+
+#: templates/store/carts.html:89
+msgid "Checkout"
+msgstr "الدفع"
+
+#: templates/store/contact.html:4
+msgid "Contact"
+msgstr "تواصل معنا"
+
+#: templates/store/contact.html:11
+msgid "Name"
+msgstr "الاسم"
+
+#: templates/store/contact.html:19
+msgid "Enter your name"
+msgstr "أكتب اسمك"
+
+#: templates/store/contact.html:24
+msgid "Email"
+msgstr "البريد الالكتروني"
+
+#: templates/store/contact.html:32
+msgid "Enter your email"
+msgstr "أكتب بريديك الالكتروني"
+
+#: templates/store/contact.html:37
+msgid "Message"
+msgstr "رسالتك"
+
+#: templates/store/contact.html:45
+msgid "Enter your message"
+msgstr "أكتب رسالتك"
+
+#: templates/store/contact.html:53
+msgid "Send"
+msgstr "أرسال"
+
+#: templates/store/home.html:9
+msgid "New Arrivals"
+msgstr "وصل حديثاَ"
+
+#: templates/store/home.html:10
+msgid "All Products"
+msgstr "كل المنتجات"
+
+#: templates/store/home.html:11
+msgid "Best Selling"
+msgstr "افضل المبيعيات"
+
+#: templates/store/home.html:12
+msgid "All Collection"
+msgstr "كل المجموعات"
+
+#: templates/store/home.html:14
+msgid "Category"
+msgstr "الفئة"
+
+#: templates/store/home.html:36
+msgid "Store"
+msgstr "المتجر"
+
+#: templates/store/home.html:53
+msgid "LE"
+msgstr "جنيه"
+
+#: templates/store/home.html:59
+msgid "Remove From Cart"
+msgstr "إزالة من السلة"
+
+#: templates/store/home.html:61
+msgid " Add To Cart"
+msgstr "أضف إلى السلة"
+
+#: views.py:56
+msgid "Your message has been sent successfully"
+msgstr "تم ارسال رسالتك بنجاح"
+
+#~ msgid "Products"
+#~ msgstr "المنتجات"
+
+#~ msgid "Search For Product"
+#~ msgstr "البحث عن منتج"

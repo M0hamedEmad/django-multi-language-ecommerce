@@ -1,0 +1,191 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-04-15 00:46+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+#: payment/models.py:16
+msgid "payment type"
+msgstr ""
+
+#: payment/models.py:17
+msgid "total"
+msgstr "المجموع"
+
+#: payment/models.py:30
+msgid "processing"
+msgstr "قيد المعالجة"
+
+#: payment/models.py:31
+msgid "in delivery"
+msgstr "قيد التوصيل"
+
+#: payment/models.py:32
+msgid "completed"
+msgstr "مكتمل"
+
+#: payment/models.py:33
+msgid "cancelled"
+msgstr "ملغى"
+
+#: payment/models.py:37
+msgid "status"
+msgstr "الحالة"
+
+#: payment/models.py:38
+msgid "paid"
+msgstr "مدفوع"
+
+#: payment/models.py:40
+msgid "shipping cost"
+msgstr "تكلفة الشحن"
+
+#: payment/models.py:42
+msgid "customer name"
+msgstr "اسم العميل"
+
+#: payment/models.py:43
+msgid "customer last name"
+msgstr "اسم العائلة للعميل"
+
+#: payment/models.py:44
+msgid "customer email"
+msgstr "البريد الإلكتروني للعميل"
+
+#: payment/models.py:45
+msgid "customer phone"
+msgstr "هاتف العميل"
+
+#: payment/models.py:46
+msgid "adress_line"
+msgstr "العنوان"
+
+#: payment/models.py:47
+msgid "city"
+msgstr "المدينة"
+
+#: payment/models.py:48
+msgid "state"
+msgstr "الولاية"
+
+#: payment/models.py:49
+msgid "zip_code"
+msgstr "الرمز البريدي"
+
+#: payment/models.py:52
+msgid "created at"
+msgstr "تم الإنشاء في"
+
+#: payment/models.py:53
+msgid "updated at"
+msgstr "تم التحديث في"
+
+#: payment/models.py:68
+msgid "quantity"
+msgstr "الكمية"
+
+#: payment/models.py:69
+msgid "price"
+msgstr "السعر"
+
+#: payment/templates/payment/checkout.html:4
+msgid "checkout"
+msgstr "الدفع"
+
+#: payment/templates/payment/checkout.html:14
+msgid "Important"
+msgstr "مهم"
+
+#: payment/templates/payment/checkout.html:20
+msgid "Complete your order"
+msgstr "أكمل طلبك"
+
+#: payment/templates/payment/checkout.html:25
+msgid "Personal Details"
+msgstr "التفاصيل الشخصية"
+
+#: payment/templates/payment/checkout.html:82
+msgid "Shipping Address"
+msgstr "عنوان الشحن"
+
+#: payment/templates/payment/checkout.html:84
+msgid "Address Line"
+msgstr "سطر العنوان"
+
+#: payment/templates/payment/checkout.html:86
+msgid "City"
+msgstr "المدينة"
+
+#: payment/templates/payment/checkout.html:88
+msgid "State"
+msgstr "الولاية"
+
+#: payment/templates/payment/checkout.html:90
+msgid "Zip Code"
+msgstr "الرمز البريدي"
+
+#: payment/templates/payment/checkout.html:95
+msgid "Payment"
+msgstr "الدفع"
+
+#: payment/templates/payment/checkout.html:104
+msgid "Pay via (Debit/Credit cards)"
+msgstr "الدفع عبر (بطاقات الخصم/الائتمان)"
+
+#: payment/templates/payment/checkout.html:115
+msgid "cash on delivery"
+msgstr "الدفع عند الاستلام"
+
+#: payment/templates/payment/checkout.html:132
+msgid "Cancel"
+msgstr "إلغاء"
+
+#: payment/templates/payment/checkout.html:133
+msgid "Complete Purchase"
+msgstr "إكمال الشراء"
+
+#: payment/templates/payment/checkout.html:138
+msgid "Order Summary"
+msgstr "ملخص الطلب"
+
+#: payment/templates/payment/checkout.html:163
+msgid "Subtotal"
+msgstr "المجموع الفرعي"
+
+#: payment/templates/payment/checkout.html:167
+msgid "Shipping"
+msgstr "الشحن"
+
+#: payment/templates/payment/checkout.html:171
+msgid "Total"
+msgstr "المجموع"
+
+#: payment/views.py:36
+msgid "Please add product to cart"
+msgstr "يرجى إضافة المنتج إلى السلة"
+
+#: payment/views.py:48
+msgid "An error occurred while trying to register the request. Try again or contact support"
+msgstr "حدث خطأ أثناء محاولة تسجيل الطلب. حاول مرة أخرى أو اتصل بالدعم"
+
+#: payment/views.py:70
+msgid "Error during payment process. Try again or contact support"
+msgstr "حدث خطأ أثناء عملية الدفع. حاول مرة أخرى أو اتصل بالدعم"
+
+#: payment/views.py:76
+msgid "The order has been added and will reach you within a few days"
+msgstr "تم إضافة الطلب وسيصلكم خلال أيام قليلة"

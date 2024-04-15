@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% block title %} {% translate "Collection" %} {% endblock title %}
+{% block content %}
+    
+    <!-- Start Product -->
+    <main class="max-w-7xl mx-auto mt-14 px-3 min-h-[calc(100vh-372px)]">
+        <!-- Products -->
+        <div class="products mt-8 mb-10 grid grid-cols-2 md:grid-cols-3 gap-4">
+            {% for element in collection_list %}
+            <div class="card rounded-2xl relative mb-5 w-full transition duration-500 shadow-md hover:shadow-lg">
+                <a href="{% url 'collection_page' element.slug %}" class="h-full flex flex-col justify-between">
+                    <div class="bg-white w-full h-96 overflow-hidden flex justify-center items-center px-4">
+                        <img class="block w-full overflow-hidden transition duration-500 transform hover:scale-105" src="
+                        {% if element.get_image_url %}{{element.get_image_url}}
+                        {% else %}{% static 'image/collection_default.jpg' %}
+                        {% endif %}" alt="">
+                    </div>
+                    <div class="info bg-gray-500 py-3 -mt-2 text-white z-10">
+                        <span class="text-base tracking-wide font-semibold text-center block">{{ element.get_name }}</span>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+    <!-- End Product -->
+
+
+{% endblock content %}

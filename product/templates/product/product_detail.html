@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %} {{ website_title }} | {{ product.get_title }} {% endblock title %}
+{% block content %}
+    <!-- Start Header -->
+    <header>
+        <h1 class=" text-2xl text-white p-5 bg-slate-500 text-center">
+          {% if product.cateogry %}
+          <a class="text-blue-100 hover:text-blue-200" href="{% url 'collection_page' product.cateogry.collection.slug %}?category={{product.cateogry.slug}}">{{ product.cateogry.get_name }}</a> 
+          {% endif %}
+          {{ product.get_title }}</h1>
+    </header>
+    <!-- End Header -->
+    <!-- Start Product -->
+    <main class="max-w-7xl mx-auto min-h-[calc(100vh-300px)] px-3">
+        <section class="text-gray-600 body-font overflow-hidden border-b border-gray-300 mb-5">
+            <div class="container px-5 py-12 mx-auto">
+                <div class="product-card lg:w-4/5 mx-auto flex flex-wrap">
+                    <div class="lg:w-1/2 w-full lg:h-auto min-h-64 object-cover object-center rounded flex justify-center items-center shadow-xl relative">
+                      <span id="soldOut" class="rounded-full w-16 h-16 text-white bg-gray-400 absolute text-sm flex justify-center items-center left-5 top-4 hidden"> {% translate "Sold Out" %}</span>
+                        <img alt="ecommerce" id='productImage' class="w-full transition duration-300 trasform hover:scale-110" src="{% if product.get_image_url %}{{product.get_image_url}}{% else %}{% static 'image/product_deault_image.jpg' %}{% endif %}">
+                    </div>
+                    <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+                    <h1 class="tracking-wide text-gray-900 text-4xl border-b border-gray-200 title-font font-medium pb-3">{{ product.get_title }}</h1>
+                    <p class="mt-5 text-black font-semibold text-lg tracking-wide">{% translate "About the" %} {{ product.get_title }}</p>
+                    <p class="mt-1 leading-relaxed text-gray-800">{{ product.get_summary }}</p>
+                    <div class="flex mt-3 justify-between items-center py-5 border-b-2 border-gray-100 mb-5 border-t ">
+                        <div class="flex flex-col gap-4">
+                            <div class="flex ">
+                              <span class="mr-3">{% translate "Color:" %}</span>
+                              <span class="text-black">{{ product.get_color|default_if_none:"_" }}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex ml-6 items-center">
+                            <span class="mr-3">{% translate "Size" %}</span>
+                            <div class="relative">
+                                <select name="size" id="sizeSelect" class="cursor-pointer rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10 hover:border-blue-500">
+                                  {% for size in product.get_size %}
+                                  <option data-sizeid="{{ size.id }}" value="{{ size.available_qunatity }}">{{ size.size }}</option>
+                                  {% endfor %}
+                                </select>
+                                <span class="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
+                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4" viewBox="0 0 24 24">
+                                    <path d="M6 9l6 6 6-6"></path>
+                                </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="title-font font-medium text-2xl text-gray-900">{{ product.price }} {% translate "L.E" %}</span>
+                        <button class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
+                          <div class="group p-3 wishlist-icon {% if is_wishlist %}bg-red-100{% else %}bg-green-50{% endif %} rounded-full"  data-productslug="{{product.slug}}">
+                            <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class=" group-hover:text-red-500 transform group-hover:scale-110 w-6 h-6 {% if is_wishlist %}text-red-500{% else %}text-gray-800{% endif %} transition duration-300">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                            </svg> 
+                          </div>
+                        </button>
+                    </div>
+                    <button type="button" id="addToCartBtn" class="submit-btn hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-10 border border-blue-500 hover:border-transparent rounded-xl transition duration-300 {% if product.slug in cart_product_list %}bg-blue-500 text-white hover:bg-gray-400 px-5{% endif %}" data-productslug="{{product.slug}}"  data-productid="{{product.id}}">
+                      {% if product.slug in cart_product_list %}
+                          {% translate 'Remove From Cart' %}
+                      {% else %}
+                          {% translate ' Add To Cart' %}
+                      {% endif %}
+                  </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="more-product">
+            <div class="bg-white">
+                <div class="mx-auto max-w-2xl px-4 py-5 sm:px-6 sm:py-6 lg:max-w-7xl lg:px-8 border-b border-gray-300 mb-10">
+                  <h2 class="text-2xl font-bold tracking-tight text-gray-900">{% translate "Related Product" %}</h2>
+                  <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+                      {% for product in more_product|slice:"4" %}
+                      <div class="group relative">
+                        <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80 transition duration-500 transform group-hover:scale-105">
+                          <img src="{% if product.get_image_url %}{{product.get_image_url}}{% else %}{% static 'image/product_deault_image.jpg' %}{% endif %}" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+                        </div>
+                        <div class="mt-4 flex justify-between">
+                          <div>
+                            <h3 class="text-sm text-gray-700">
+                              <a href="{% url 'product' product.slug %}">
+                                <span aria-hidden="true" class="absolute inset-0"></span>
+                                {{ product.get_title }}
+                              </a>
+                            </h3>
+                            <p class="mt-1 text-sm text-gray-500">{{ product.get_color|default_if_none:"" }}</p>
+                          </div>
+                          <p class="text-sm font-medium text-gray-900">{{ product.price }}</p>
+                        </div>
+                      </div>
+                      {% endfor %}
+                      <!-- More products... -->
+                    </div>
+
+                </div>
+              </div>
+        </div>
+
+    </main>
+    <!-- End Product -->
+{% endblock content %}
+{% block scripts %}
+    <script>
+      let sizeSelect = document.getElementById('sizeSelect')
+      sizeSelect.addEventListener('change', function() {
+        if(this.value <= 0 ) {
+          document.getElementById('soldOut').classList.remove("hidden")
+          document.getElementById('addToCartBtn').disabled = true
+          document.getElementById('productImage').classList.add("opacity-50")
+        } else {{
+          document.getElementById('soldOut').classList.add('hidden')
+          document.getElementById('addToCartBtn').disabled = false
+          document.getElementById('productImage').classList.remove("opacity-50")
+        }}
+      })
+    </script>
+{% endblock scripts %}

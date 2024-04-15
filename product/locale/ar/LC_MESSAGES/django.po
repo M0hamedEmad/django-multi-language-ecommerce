@@ -1,0 +1,184 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-04-15 00:46+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+#: product/models.py:9 product/models.py:35
+msgid "name"
+msgstr "ألاسم"
+
+#: product/models.py:10 product/models.py:36
+msgid "arabic name"
+msgstr "الاسم العربي"
+
+#: product/models.py:11
+msgid "Image"
+msgstr "صورة"
+
+#: product/models.py:37 product/models.py:75
+msgid "image"
+msgstr "صورة"
+
+#: product/models.py:42
+msgid "category"
+msgstr "فئة"
+
+#: product/models.py:43
+msgid "categories"
+msgstr "فئات"
+
+#: product/models.py:72 product/models.py:141
+msgid "title"
+msgstr "عنوان"
+
+#: product/models.py:73 product/models.py:143
+msgid "color"
+msgstr "لون"
+
+#: product/models.py:74 product/models.py:142
+msgid "summary"
+msgstr "ملخص"
+
+#: product/models.py:77 product/models.py:144
+msgid "tags"
+msgstr "علامات"
+
+#: product/models.py:78
+msgid "price"
+msgstr "السعر"
+
+#: product/models.py:79
+msgid "is available"
+msgstr "متاح"
+
+#: product/models.py:80
+msgid "created at"
+msgstr "تم الإنشاء في"
+
+#: product/models.py:81
+msgid "updated at"
+msgstr "تم التحديث في"
+
+#: product/models.py:146
+msgid "language"
+msgstr "لغة"
+
+#: product/models.py:151
+msgid "size"
+msgstr "حجم"
+
+#: product/models.py:152
+msgid "available qunatity"
+msgstr "الكمية المتاحة"
+
+#: product/templates/product/collection.html:4
+msgid "Collection"
+msgstr "مجموعة"
+
+#: product/templates/product/product_detail.html:21
+#: product/templates/product/products.html:108
+msgid "Sold Out"
+msgstr "نفذت الكمية"
+
+#: product/templates/product/product_detail.html:26
+msgid "About the"
+msgstr "حول"
+
+#: product/templates/product/product_detail.html:31
+msgid "Color:"
+msgstr "اللون:"
+
+#: product/templates/product/product_detail.html:37
+msgid "Size"
+msgstr "الحجم"
+
+#: product/templates/product/product_detail.html:53
+msgid "L.E"
+msgstr "ج.م"
+
+#: product/templates/product/product_detail.html:64
+#: product/templates/product/products.html:124
+msgid "Remove From Cart"
+msgstr "إزالة من السلة"
+
+#: product/templates/product/product_detail.html:66
+#: product/templates/product/products.html:126
+msgid " Add To Cart"
+msgstr "أضف إلى السلة"
+
+#: product/templates/product/product_detail.html:77
+msgid "Related Product"
+msgstr "منتج ذو صلة"
+
+#: product/templates/product/products.html:4
+msgid "Products"
+msgstr "منتجات"
+
+#: product/templates/product/products.html:12
+msgid "Wish list"
+msgstr "قائمة الرغبات"
+
+#: product/templates/product/products.html:14
+msgid "Searching"
+msgstr "بحث"
+
+#: product/templates/product/products.html:40
+msgid "Categories"
+msgstr "الفئات"
+
+#: product/templates/product/products.html:51
+#: product/templates/product/products.html:53
+msgid "All"
+msgstr "الكل"
+
+#: product/templates/product/products.html:70
+msgid "Order By"
+msgstr "الترتيب حسب"
+
+#: product/templates/product/products.html:79
+msgid "Best Selling"
+msgstr "الأكثر مبيعاً"
+
+#: product/templates/product/products.html:82
+msgid "Alphabetically, A-Z"
+msgstr "أبجديًا، من أ إلى ي"
+
+#: product/templates/product/products.html:85
+msgid "Alphabetically, Z-A"
+msgstr "أبجديًا، من ي إلى أ"
+
+#: product/templates/product/products.html:88
+msgid "Price, low to high"
+msgstr "السعر، من الأقل إلى الأعلى"
+
+#: product/templates/product/products.html:91
+msgid "Price, high to low"
+msgstr "السعر، من الأعلى إلى الأقل"
+
+#: product/templates/product/products.html:94
+msgid "Date, old to new"
+msgstr "التاريخ، من القديم إلى الجديد"
+
+#: product/templates/product/products.html:97
+msgid "Date, new to old"
+msgstr "التاريخ، من الجديد إلى القديم"
+
+#: product/templates/product/products.html:118
+msgid "LE"
+msgstr "ج.م"
+

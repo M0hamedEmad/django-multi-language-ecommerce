@@ -1,0 +1,29 @@
+.radius-50 {
+    border-radius: 50%;
+}
+.errorlist li {
+    color: rgb(153 27 27);
+    padding: .5rem;
+    text-align: center;
+    background-color: rgb(254 242 242);
+    border-radius: 10px;
+    margin-top: 2px;
+    font-size: 16px;
+}
+
+/* Style the card element */
+#card-element {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: white;
+    font-size: 25px;
+}
+
+/* Style the error message */
+#card-errors {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 10px;
+}

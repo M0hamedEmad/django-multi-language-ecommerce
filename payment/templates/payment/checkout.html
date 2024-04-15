@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %} {% translate 'checkout' %} {% endblock title %}
+{% block content %}
+    <!-- Start CheckOut -->
+    <main class="bg-gray-50 min-h-screen pt-10 -mt-8">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 xl:grid-cols-3 gap-4 h-full">
+            <div class="xl:col-span-2 h-max rounded-md p-8  top-0">
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li class="{% if message.tags %} {{ message.tags }}{% endif %} text-red-700 bg-red-50 border border-red-200 p-3 my-3 ">
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}{% translate 'Important' %}: {% endif %}
+                        {{ message }}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <h2 class="text-2xl font-bold text-[#333]">{% translate "Complete your order" %}</h2>
+                <form class="mt-10" method="post" id="payment-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="payment_method_id" id="paymentMethodId">
+                    <div>
+                        <h3 class="text-lg font-bold text-[#333] mb-6">{% translate "Personal Details" %}</h3>
+                        <div class="grid sm:grid-cols-2 gap-6">
+                        <div class="relative flex items-center">
+                            <input name="customer_first_name" id="customer_first_name" type="text" placeholder="First Name" {% if user.is_authenticated %} readonly value="{{ user.first_name }}"{% endif %}
+                            class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-[18px] h-[18px] absolute right-4 rtl:right-full rtl:-mr-6"
+                            viewBox="0 0 24 24">
+                            <circle cx="10" cy="7" r="6" data-original="#000000"></circle>
+                            <path
+                                d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z"
+                                data-original="#000000"></path>
+                            </svg>
+                        </div>
+                        <div class="relative flex items-center">
+                            <input type="text" name="customer_last_name" placeholder="Last Name" {% if user.is_authenticated %} readonly value="{{ user.last_name }}"{% endif %}
+                            class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-[18px] h-[18px] absolute right-4 rtl:right-full rtl:-mr-6"
+                            viewBox="0 0 24 24">
+                            <circle cx="10" cy="7" r="6" data-original="#000000"></circle>
+                            <path
+                                d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z"
+                                data-original="#000000"></path>
+                            </svg>
+                        </div>
+                        <div class="relative flex items-center">
+                            <input type="email" placeholder="Email" name="customer_email" {% if user.is_authenticated %} readonly value="{{ user.email }}"{% endif %}
+                            class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-[18px] h-[18px] absolute right-4 rtl:right-full rtl:-mr-6"
+                            viewBox="0 0 682.667 682.667">
+                            <defs>
+                                <clipPath id="a" clipPathUnits="userSpaceOnUse">
+                                <path d="M0 512h512V0H0Z" data-original="#000000"></path>
+                                </clipPath>
+                            </defs>
+                            <g clip-path="url(#a)" transform="matrix(1.33 0 0 -1.33 0 682.667)">
+                                <path fill="none" stroke-miterlimit="10" stroke-width="40"
+                                d="M452 444H60c-22.091 0-40-17.909-40-40v-39.446l212.127-157.782c14.17-10.54 33.576-10.54 47.746 0L492 364.554V404c0 22.091-17.909 40-40 40Z"
+                                data-original="#000000"></path>
+                                <path
+                                d="M472 274.9V107.999c0-11.027-8.972-20-20-20H60c-11.028 0-20 8.973-20 20V274.9L0 304.652V107.999c0-33.084 26.916-60 60-60h392c33.084 0 60 26.916 60 60v196.653Z"
+                                data-original="#000000"></path>
+                            </g>
+                            </svg>
+                        </div>
+                        <div class="relative flex items-center">
+                            <input type="number" name='customer_phone' placeholder="Phome No." {% if user.is_authenticated %} value="{{ user.phone_number|default_if_none:'' }}"{% endif %}
+                            class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
+                            <svg fill="#bbb" class="w-[18px] h-[18px] absolute right-4 rtl:right-full rtl:-mr-6" viewBox="0 0 64 64">
+                            <path
+                                d="m52.148 42.678-6.479-4.527a5 5 0 0 0-6.963 1.238l-1.504 2.156c-2.52-1.69-5.333-4.05-8.014-6.732-2.68-2.68-5.04-5.493-6.73-8.013l2.154-1.504a4.96 4.96 0 0 0 2.064-3.225 4.98 4.98 0 0 0-.826-3.739l-4.525-6.478C20.378 10.5 18.85 9.69 17.24 9.69a4.69 4.69 0 0 0-1.628.291 8.97 8.97 0 0 0-1.685.828l-.895.63a6.782 6.782 0 0 0-.63.563c-1.092 1.09-1.866 2.472-2.303 4.104-1.865 6.99 2.754 17.561 11.495 26.301 7.34 7.34 16.157 11.9 23.011 11.9 1.175 0 2.281-.136 3.29-.406 1.633-.436 3.014-1.21 4.105-2.302.199-.199.388-.407.591-.67l.63-.899a9.007 9.007 0 0 0 .798-1.64c.763-2.06-.007-4.41-1.871-5.713z"
+                                data-original="#000000"></path>
+                            </svg>
+                        </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <h3 class="text-lg font-bold text-[#333] mb-6">{% translate "Shipping Address" %}</h3>
+                        <div class="grid sm:grid-cols-2 gap-6">
+                            <input type="text" name="adress_line" placeholder="{% translate 'Address Line' %}" {% if user.is_authenticated %}value="{{ user.adress_line|default_if_none:'' }}"{% endif %}
+                                class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
+                            <input type="text" name="city" placeholder="{% translate 'City' %}" {% if user.is_authenticated %}value="{{ user.city|default_if_none:'' }}"{% endif %}
+                                class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
+                            <input type="text" name="state" placeholder="{% translate 'State' %}" {% if user.is_authenticated %}value="{{ user.state|default_if_none:'' }}"{% endif %}
+                                class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
+                            <input type="text" name="zip_code" placeholder="{% translate 'Zip Code' %}" {% if user.is_authenticated %}value="{{ user.zip_code|default_if_none:'' }}"{% endif %}
+                                class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <h3 class="text-lg font-bold text-[#333] mb-6">{% translate "Payment" %}</h3>
+                        <ul class="flex gap-4">
+                            <li class="w-1/2">
+                                <input type="radio" name="pay_method" id="visa" class="hidden peer" value="card" checked>
+                                <label for="visa" class="inline-flex flex-col items-center justify-between gap-1 w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer  peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-blue-500 transition duration-200">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
+                                    </svg>
+                                    <span>
+                                        {% translate "Pay via (Debit/Credit cards)" %}
+                                    </span>
+                                </label>
+                            </li>
+                            <li class="w-1/2">
+                                <input type="radio" name="pay_method" id="cash" class="hidden peer" value="cash">
+                                <label for="cash" class="inline-flex flex-col items-center justify-between gap-1 w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer  peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-blue-500 transition duration-200">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"  stroke="currentColor" class="w-10 h-10">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
+                                    </svg>
+                                    <span>
+                                        {% translate "cash on delivery" %}
+                                    </span>
+                                </label>
+                            </li>                            
+                        </ul>
+                        <div class="card-info mt-6">
+                            <div id="card-element">
+                                <!-- A Stripe Element will be inserted here. -->
+                            </div>
+                            <!-- Used to display form errors. -->
+                            <div id="card-errors" role="alert"></div>
+                        </div>
+                    </div>
+                    {% for cart in carts %}
+                    <input type="hidden" name="carts" value="{{cart.id}}">
+                    {% endfor %}
+                    <div class="flex gap-6 max-sm:flex-col mt-10">
+                        <a href="{% url 'home' %}" class="rounded-md px-6 py-3 w-full text-sm font-semibold bg-transparent hover:bg-gray-100 border-2 text-[#333] text-center">{% translate "Cancel" %}</a>
+                        <button type="submit" class="rounded-md px-6 py-3 w-full text-sm font-semibold bg-[#333] text-white hover:bg-[#222]">{% translate "Complete Purchase" %}</button>
+                    </div>
+                </form>
+            </div>
+            <div class="orders-summary px-2">
+                <h2 class="text-xl text-black mb-4">{% translate "Order Summary" %}</h2>
+                <div class="bg-white border border-gray-300 rounded-xl pb-7">
+                    <div class="relative h-full">
+                        <div class="lg:overflow-auto">
+                            <div class="space-y-6 mt-7 border-b border-gray-200 pb-6 mb-8 px-5">
+                                {% for cart in carts %}
+                                <div class="flex flex-wrap gap-5 product-row">
+                                    <div class="shrink-0 bg-gray-50 rounded-md">
+                                    <img src="{% if product.get_image_url %}{{product.get_image_url}}{% else %}{% static 'image/product_deault_image.jpg' %}{% endif %}" class="w-32 object-contain" />
+                                    </div>
+                                    <div class="flex-grow">
+                                        <h3 class="text-base text-black">{{ cart.product.get_title }}</h3>
+                                        <span class="block text-gray-500 mt-1">{{ cart.product.get_color|default_if_none:"" }}</span>
+                                        <span class="block text-gray-500">{{ cart.size.size|default_if_none:"" }}</span>
+                                        <div class="flex mt-3 justify-between items-center">
+                                            <span class="price text-gray-950 text-lg">{{ cart.product.price }}</span>
+                                            <span class="qunatity border border-gray-300 px-5 py-1 shadow rounded">{{ cart.quantity }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="cost-info px-5">
+                            <div class="flex justify-between items-center">
+                                <span>{% translate "Subtotal" %}</span> 
+                                <span class="subtotal">0</span>
+                            </div>
+                            <div class="flex justify-between items-center py-5 border-b border-gray-300">
+                                <span>{% translate "Shipping" %}</span> 
+                                <span class="shipping">0</span>
+                            </div>    
+                            <div class="flex justify-between items-center mt-5">
+                                <span class="font-bold text-lg">{% translate "Total" %}</span> 
+                                <span class="text-lg total">0</span>
+                            </div>                                                    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- End CheckOut -->
+{% endblock content %}
+
+{% block scripts %}
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    let productRow = document.querySelectorAll('.product-row')
+    let total = 0
+    productRow.forEach(element => {
+        let price = element.querySelector('.price').textContent
+        let qunatity = element.querySelector('.qunatity').textContent
+
+        total += ( parseInt(price) * parseInt(qunatity) )
+    });
+    document.querySelector('.subtotal').textContent = total
+    document.querySelector('.total').textContent = total + parseInt(document.querySelector('.shipping').textContent)
+
+    var stripe = Stripe('{{ STRIPE_PUBLIC_KEY }}'); // Stripe Config
+</script>
+<script src="{% static 'payment/js/stripe_config.js' %}"></script>
+
+{% endblock scripts %}

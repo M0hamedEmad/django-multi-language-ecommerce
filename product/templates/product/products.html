@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %} {{ website_title }} | {% translate 'Products' %} {% endblock title %}
+{% block content %}
+<!-- Start Header -->
+    <header>
+    <h1 class="uppercase text-2xl text-white p-5 bg-slate-500 text-center">
+        {% if '/collection/' in request.path %}
+            {{ collection.get_name }}
+        {% elif request.GET.search == 'wishlist' %}
+            {% translate "Wish list" %}
+        {% else %}
+            {% translate "Searching" %} {{ request.GET.search }}
+        {% endif %}
+    </h1>
+    {% if '/collection/' in request.path %}
+        <div class="category max-w-7xl mx-auto px-3 mt-10">
+            <ul class="flex gap-3 justify-center items-center">
+                {% for category in categories|slice:"4"  %}
+                <li class="w-1/4">
+                    <a href="?category={{category.slug}}" class="max-h-96 h-full w-full flex justify-center items-center flex-col">
+                        <img class="w-full overflow-hidden transition ease-linear duration-500 transform hover:scale-110" src="{% if category.get_image_url %}{{category.get_image_url}}{% else %}{% static 'image/category_deault_image.jpg' %}{% endif %}" alt="">
+                        <span class="mt-2 text-base text-center text-gray-800 font-semibold">{{ category.get_name }}</span>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </header>
+    <!-- End Header -->
+
+    <!-- Start Product -->
+    <main class="max-w-7xl mx-auto mt-14 px-3 min-h-[calc(100vh-372px)]">
+        <header class="flex justify-between items-center">
+            {% if '/collection/' in request.path %}
+            <div class="cateory relative transition duration-500">
+                <button id="dropDownCategoryBtn" data-dropdown-toggle="dropdown" class="inline-flex items-center border border-gray-300 px-5 py-2 rounded-2xl hover:border-gray-400 transition duration-300" type="button">{% if request.GET.category %} {{ request.GET.category }}
+                {% else %} {% translate "Categories" %}
+                {% endif %}<svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                    </svg>
+                    </button>
+                    
+                <!-- Dropdown menu -->
+                <div id="dropdownCategory" class="absolute border border-gray-100 z-10 hidden rounded-lg w-72 mt-1 shadow-lg shadow-gray-300 overflow-auto max-h-72 bg-white">
+                    <ul class="py-3 text-sm w-full" aria-labelledby="dropdownDefaultButton">
+                        <li>
+                            {% if request.GET.category  %}
+                                <a href="?categort=" class="block px-3 py-3 text-base hover:bg-gray-100">{% trans "All" %}</a>
+                            {% else %}
+                                <a href="?categort=" class="block px-3 py-3 text-base bg-gray-100">{% trans "All" %}</a>
+                            {% endif %}
+                        </li>
+                        {% for category in categories %}
+                        <li>
+                            {% if category.slug == request.GET.category  %}
+                                <a href="?category={{ category.slug }}" class="block px-3 py-3 text-base bg-gray-100">{{ category.get_name }}</a>
+                            {% else %}
+                                <a href="?category={{ category.slug }}" class="block px-3 py-3 text-base hover:bg-gray-100">{{ category.get_name }}</a>
+                            {% endif %}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            {% endif %}
+            <div class="sorting relative">
+                <button id="dropDownSortingBtn" data-dropdown-toggle="dropdown" class="inline-flex items-center border border-gray-300 px-5 py-2 rounded-2xl hover:border-gray-400 transition duration-300" type="button"> {% translate "Order By" %} <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                    </svg>
+                    </button>
+                    
+                <!-- Dropdown menu -->
+                <div id="dropdownSort" class="border border-gray-100 z-10 hidden rounded-lg w-72 mt-1 shadow-lg shadow-gray-300 overflow-auto max-h-72 absolute bg-white">
+                    <ul class="py-3 text-sm w-full" aria-labelledby="dropdownDefaultButton">
+                        <li>
+                            <a href="?order=best_selling" class="block px-3 py-3 text-base {% if request.GET.order != 'best_selling' %}hover:{% endif %}bg-gray-100">{% translate "Best Selling" %}</a>
+                        </li>
+                        <li>
+                            <a href="?order=a-z" class="block px-3 py-3 text-base {% if request.GET.order != 'a-z' %}hover:{% endif %}bg-gray-100">{% translate "Alphabetically, A-Z" %}</a>
+                        </li>
+                        <li>
+                            <a href="?order=z-a" class="block px-3 py-3 text-base {% if request.GET.order != 'z-a' %}hover:{% endif %}bg-gray-100">{% translate "Alphabetically, Z-A" %}</a>
+                        </li>
+                        <li>
+                            <a href="?order=low_to_high" class="block px-3 py-3 text-base {% if request.GET.order != 'low_to_high' %}hover:{% endif %}bg-gray-100">{% translate "Price, low to high" %}</a>
+                        </li>
+                        <li>
+                            <a href="?order=high_to_low" class="block px-3 py-3 text-base {% if request.GET.order != 'high_to_low' %}hover:{% endif %}bg-gray-100">{% translate "Price, high to low" %}</a>
+                        </li>
+                        <li>
+                            <a href="?order=old_to_new" class="block px-3 py-3 text-base {% if request.GET.order != 'old_to_new' %}hover:{% endif %}bg-gray-100">{% translate "Date, old to new" %}</a>
+                        </li>
+                        <li>
+                            <a href="?order=new_to_old" class="block px-3 py-3 text-base {% if request.GET.order != 'new_to_old' %}hover:{% endif %}bg-gray-100">{% translate "Date, new to old" %}</a>
+                        </li>                        
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <div class="products mt-8 mb-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+            {% for product in products %}
+            <div class="product-card card relative mb-5 p-4 w-full shadow-md transition duration-500 transform hover:shadow-2xlxl">
+                {% if product.get_availalbe_quantity <= 0 %}
+                <span class="text-center rounded-full w-16 h-16 text-white bg-gray-400 absolute text-sm flex justify-center items-center right-5 top-4"> {% translate "Sold Out" %}</span>
+                {% endif %}
+                <a href="{% url 'product' product.slug %}" class="h-full flex flex-col justify-between">
+                    <div class="bg-white w-full h-72 overflow-hidden flex justify-center items-center">
+                        <img class="block w-full overflow-hidden" src="{% if product.get_image_url %}{{product.get_image_url}}{% else %}{% static 'image/product_deault_image.jpg' %}{% endif %}" alt="">
+                    </div>
+                    <div class="info mt-3">
+                        <div class="box">
+                            <span class="text-sm font-bold">{{ product.get_title }}</span>
+                            <div class="price mt-2 mb-2">
+                                <span class="font-semibold text-xl text-gray-800">{{ product.price }} {% translate 'LE' %}</span>
+                            </div>
+                        </div>
+                        <div class="icon flex mt-2 justify-between items-center">
+                            <button {% if product.get_availalbe_quantity <= 0 %}disabled{% endif %}  type="button" class="{% if product.get_availalbe_quantity <= 0 %}opacity-50{% endif %} submit-btn hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-10 border border-blue-500 hover:border-transparent rounded-xl transition duration-300 {% if product.slug in cart_product_list %}bg-blue-500 text-white hover:bg-gray-400 px-5{% endif %}" data-productslug="{{product.slug}}"  data-productid="{{product.id}}">
+                                {% if product.slug in cart_product_list %}
+                                    {% translate 'Remove From Cart' %}
+                                {% else %}
+                                    {% translate ' Add To Cart' %}
+                                {% endif %}
+                            </button>
+
+                            <div class="group p-3 wishlist-icon {% if product.slug in wish_list %}bg-red-100{% else %}bg-green-50{% endif %} rounded-full"  data-productslug="{{product.slug}}">
+                                <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class=" group-hover:text-red-500 transform group-hover:scale-110 w-6 h-6 {% if product.slug in wish_list %}text-red-500{% else %}text-gray-800{% endif %} transition duration-300">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                                </svg> 
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        
+        {% if products.has_other_pages %}
+        <div class="pagein mb-10">
+            <div class="flex justify-center mt-10 space-x-2">
+                {% for i in products.paginator.page_range|slice:"7" %}
+                    {% if i < 7 %}
+                        <a href="?page={{ i }}"
+                        class="hover:bg-gray-100 px-2 py-1 sm:px-4 sm:py-2 ml-1 mt-2 text-gray-600 border rounded-lg focus:outline-none
+                            {% if i == products.number %} ring ring-primary bg-primary/20 {% endif %}">
+                            {{i}}
+                        </a>
+                    {% else %}
+                        <span
+                            class="px-2 py-1 sm:px-4 sm:py-2 mt-2 text-gray-600 rounded-lg focus:outline-none">...</span>
+                        <a href="?page={{ i }}"
+                            class="px-2 py-1 sm:px-4 sm:py-2 mt-2 text-gray-600 border rounded-lg hover:bg-gray-100 focus:outline-none">{{ products.paginator.num_pages }}
+                        </a>
+                    {% endif %}
+                {% endfor %}
+                {% if products.has_next %}
+                    <a href="?page={{ products.next_page_number }}"
+                        class="px-2 py-1 sm:px-4 sm:py-2 mt-2 text-gray-600 border rounded-lg hover:bg-gray-100 focus:outline-none">
+                        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                            aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </main>
+    <!-- End Product -->
+{% endblock content %}
